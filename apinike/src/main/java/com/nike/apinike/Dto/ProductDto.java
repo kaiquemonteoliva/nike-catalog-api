@@ -1,9 +1,11 @@
 package com.nike.apinike.Dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Getter
 @Setter
@@ -14,7 +16,7 @@ public record ProductDto(
         @NotNull String descricao,
 
 
-        @NotNull String foto,
+        @NotNull MultipartFile foto,
 
 
         @NotNull  String tamanho
@@ -26,9 +28,7 @@ public record ProductDto(
     }
 
 
-    public String getFoto() {
-        return foto;
-    }
+    public byte[] getFoto() throws IOException {return foto.getBytes();}
 
 
     public String getTamanho() {

@@ -23,16 +23,16 @@ public class ProductModels {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @JsonProperty("nome")
+//    @JsonProperty("nome")
     private String nome;
 
-    @JsonProperty("descricao")
+//    @JsonProperty("descricao")
     private String descricao;
 
-    @JsonProperty("foto")
-    private String foto;
 
-    @JsonProperty("tamanho")
+    private byte[] foto;
+
+//    @JsonProperty("tamanho")
     private String tamanho;
 
     public String getNome() {
@@ -51,11 +51,11 @@ public class ProductModels {
         this.descricao = descricao;
     }
 
-    public String getFoto() {
+    public byte[] getFoto() {
         return foto;
     }
 
-    public void setFoto(String foto) {
+    public void setFoto(byte[] foto) {
         this.foto = foto;
     }
 

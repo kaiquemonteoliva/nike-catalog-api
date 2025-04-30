@@ -8,9 +8,13 @@ import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,16 +36,25 @@ public class ProductController {
         return ResponseEntity.ok(produto);
     }
 
-    @PostMapping
-    public ResponseEntity<Object> cadastrarProduto(@RequestBody @Valid ProductDto productDto){
+    @PostMapping (consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Object> cadastrarProduto(@ModelAttribute @Valid ProductDto productDto){
         var produto = new ProductModels();
         BeanUtils.copyProperties(productDto, produto);
+
+        try {
+            if (productDto.getFoto() != null && !productDto.getFoto().isEmpty()) {
+                produto.setFoto(Arrays.toString(produto.getFoto().getBytes()));
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao processar a imagem.");
+        }
+
         return ResponseEntity.status(HttpStatus.CREATED).body(productRepository.save(produto));
 
     }
 
     @PutMapping("/atualizar/{nome}")
-    public ResponseEntity<String> updateProduct(@PathVariable String nome, @RequestBody @Valid ProductDto productDto){
+    public ResponseEntity<String> updateProduct(@PathVariable String nome, @RequestBody @Valid ProductDto productDto) throws IOException {
 
         Optional<ProductModels> produtoOpicional = productRepository.findByNome(nome);
 
