@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.UUID;
 
@@ -55,7 +56,7 @@ public class ProductModels {
         return foto;
     }
 
-    public void setFoto(byte[] foto) {
+    public void setFoto(byte [] foto) {
         this.foto = foto;
     }
 

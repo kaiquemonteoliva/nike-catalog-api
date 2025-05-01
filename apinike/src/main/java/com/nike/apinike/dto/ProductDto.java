@@ -1,11 +1,9 @@
-package com.nike.apinike.Dto;
+package com.nike.apinike.dto;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
 
 @Getter
 @Setter
@@ -19,7 +17,7 @@ public record ProductDto(
         @NotNull MultipartFile foto,
 
 
-        @NotNull  String tamanho
+        @NotNull String tamanho
 ) {
 
 
@@ -28,7 +26,9 @@ public record ProductDto(
     }
 
 
-    public byte[] getFoto() throws IOException {return foto.getBytes();}
+    public MultipartFile getFoto() {
+        return foto;
+    }
 
 
     public String getTamanho() {
