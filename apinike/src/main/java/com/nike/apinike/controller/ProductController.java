@@ -20,7 +20,7 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
-    @GetMapping
+    @GetMapping("/listar")
     public ResponseEntity<List<ProductModels>> listarProduct() {
         return ResponseEntity.ok(productService.listarProduct().getBody());
     }

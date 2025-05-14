@@ -58,9 +58,7 @@ public class ProductService {
     public ResponseEntity<String> updateProduct(@PathVariable String nome, @ModelAttribute ProductDto productDto) throws IOException {
 
         List<ProductModels> produtoOpicional = productRepository.findByNome(nome);
-//        if (produtoOpicional.stream().count() > 1) {
-//
-//        }
+
 
         if (!produtoOpicional.isEmpty()) {
             ProductModels produtoExistente = produtoOpicional.get(0);
