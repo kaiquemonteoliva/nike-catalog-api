@@ -31,7 +31,7 @@ public class SpringSecurityAuthentication {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, "/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/user/save").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/user/getall").hasRole("USER")
+                        .requestMatchers(HttpMethod.GET, "/catalogo/listar").hasRole("USER")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

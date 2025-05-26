@@ -3,7 +3,6 @@ package com.nike.apinike.controller;
 import com.nike.apinike.dto.ProductDto;
 import com.nike.apinike.models.ProductModels;
 import com.nike.apinike.service.ProductService;
-import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -42,7 +41,7 @@ public class ProductController {
 
     }
 
-    @Transactional
+
     @DeleteMapping("/deletar")
     public ResponseEntity<String> deleteProduct(@RequestParam String nome) {
         return productService.deleteProduct(nome);

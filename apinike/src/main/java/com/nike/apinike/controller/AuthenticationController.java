@@ -19,7 +19,7 @@ public class AuthenticationController {
     private AuthenticationServiceImpl authenticationServiceImpl;
 
     @PostMapping
-    public <LoginRequest> ResponseEntity<?> login(@RequestBody AuthRequest authRequest) {
+    public ResponseEntity<?> login(@RequestBody AuthRequest authRequest) {
         String token = authenticationServiceImpl.getToken(authRequest);
 
         return ResponseEntity.ok(new AuthResponse(token));
